@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER Milijan <milijan@hotmail.com>
+MAINTAINER Milijan
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update 
 RUN apt-get install -y csh
