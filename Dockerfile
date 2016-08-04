@@ -46,6 +46,6 @@ RUN ln -s /usr/lib/libproj.so.0 /usr/lib/libproj.so
 # ASP
 RUN cd /opt && git clone https://github.com/NeoGeographyToolkit/BinaryBuilder.git && cd BinaryBuilder 
 RUN cd /opt/BinaryBuilder && ./build.py --download-dir tarballs --build-root build_asp
-
+ENV PATH $PATH:/opt/BinaryBuilder/last-completed-run/install/bin
 
 
