@@ -31,17 +31,17 @@ RUN apt-get install -y freeglut3-dev
 
 # JPEG2000 support
 RUN cd /opt && git clone https://github.com/uclouvain/openjpeg.git && cd openjpeg && git checkout tags/v2.1.1
-RUN mkdir /opt/openjpeg/build && cd /opt/openjpeg/build && cmake .. && make -j6 && make install
-# NITF metadata reader
+RUN mkdir /opt/openjpeg/build && cd /opt/openjpeg/build && cmake .. && make -j$(nproc) && make install
+# satellite imaging metadata reader
 RUN cd /opt && wget http://download.osgeo.org/gdal/2.1.1/gdal211.zip && unzip gdal211.zip
-RUN cd /opt/gdal-2.1.1 && ./configure && make -j6 && make install
+RUN cd /opt/gdal-2.1.1 && ./configure && make -j$(nproc) && make install
 RUN rm /opt/gdal211.zip
 # LAS compression
 RUN cd /opt && git clone https://github.com/LASzip/LASzip.git && cd LASzip && git checkout tags/v2.2.0
-RUN cd /opt/LASzip && ./autogen.sh && ./configure --includedir=/usr/local/include/laszip && make -j6 && make install
+RUN cd /opt/LASzip && ./autogen.sh && ./configure --includedir=/usr/local/include/laszip && make -j$(nproc) && make install
 # libLAS 
 RUN cd /opt && git clone git://github.com/libLAS/libLAS.git && cd libLAS && git checkout tags/1.8.0
-RUN mkdir /opt/libLAS/makefiles && cd /opt/libLAS/makefiles && cmake -G "Unix Makefiles" ../ && make -j6 && make install
+RUN mkdir /opt/libLAS/makefiles && cd /opt/libLAS/makefiles && cmake -G "Unix Makefiles" ../ && make -j$(nproc) && make install
 RUN ln -s /usr/lib/libproj.so.0 /usr/lib/libproj.so
 # ASP
 RUN cd /opt && git clone https://github.com/NeoGeographyToolkit/BinaryBuilder.git && cd BinaryBuilder 
